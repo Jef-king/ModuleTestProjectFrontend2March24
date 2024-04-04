@@ -1,60 +1,54 @@
 let employees = [];
 function startAction() {
-    let name = document.querySelector("#name").value.trim();
-    let profession = document.querySelector("#profession").value.trim();
-    let age = document.querySelector("#age").value.trim();
-    let error = document.querySelector(".error");
-    let success = document.querySelector(".success");
-    let start = document.querySelector(".start");
-
-    if ((profession === '') || (name === '') || (age === '')) {
-        error.innerText = "Error: Please Make sure All the fields are filled before adding in an employee !";
-        success.innerText = "";
-        return;
-    }
-
-    success.innerText = "Success: Employee Added !";
-    error.innerText = "";
-
-    let id = employees.length + 1;
-
-    let employee = { id, name, profession, age };
-
-    employees.push(employee);
-
-    document.querySelector("#name").value = '';
-    document.querySelector("#profession").value = '';
-    document.querySelector("#age").value = '';
-
-    if(employees.length>0){
-        start.innerText='';
-    }
-    
+const name = document.querySelector("#name").value.trim();
+const profession = document.querySelector("#profession").value.trim();
+const age = document.querySelector("#age").value.trim();
+const error = document.querySelector(".error");
+const success = document.querySelector(".success");
+const start = document.querySelector(".start");
+if (profession === '' || name === '' || age === '') {
+error.innerText = "Error: Please make sure all fields are filled before adding an employee!";
+success.innerText = "";
+ return;
+}
+success.innerText = "Success: Employee added!";
+error.innerText = "";
+const id = employees.length + 1;
+const employee = { id, name, profession, age };
+employees.push(employee);
+document.querySelector("#name").value = '';
+document.querySelector("#profession").value = '';
+document.querySelector("#age").value = '';
+if (employees.length > 0) {
+start.innerText = '';
+}
     updateList();
 }
+
 function updateList() {
-    let list = document.querySelector("#list");
+    const list = document.querySelector("#list");
+    if (employees.length < 1) {
+        document.querySelector(".start").textContent = 'You have 0 Employees.';
+        document.querySelector(".error").textContent ='';
+        document.querySelector(".success").textContent='';
+    }
     list.innerHTML = '';
-    employees.forEach((employees) => {
-        let li = document.createElement('li');
+    employees.forEach((employee) => {
+        const li = document.createElement('li');
         li.className = 'employeeAdded';
-        li.textContent = `Name:${employees.name} Profession:${employees.profession} Age:${employees.age}`;
-        let delbtn = document.createElement('button');
+        li.textContent = `Name: ${employee.name}   Profession: ${employee.profession}   Age: ${employee.age}`;
+        const delbtn = document.createElement('button');
         delbtn.className = 'removebtn';
         delbtn.textContent = 'Delete User';
-        delbtn.onclick = () => delEmployee(employees.id);
+        delbtn.onclick = () => delEmployee(employee.id);
         li.appendChild(delbtn);
         list.appendChild(li);
     });
 }
 function delEmployee(id) {
-    let index = employees.findIndex((employees) => employees.id === id);
+    const index = employees.findIndex((emp) => emp.id === id);
     if (index !== -1) {
         employees.splice(index, 1);
-        
-    if(employees.length=0){
-        start.innerText='You have 0 Employees.';
-    }
         updateList();
     }
 }
