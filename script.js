@@ -7,8 +7,6 @@ function startAction() {
     let success = document.querySelector(".success");
     let start = document.querySelector(".start");
 
-    console.log("Hello");
-
     if ((profession === '') || (name === '') || (age === '')) {
         error.innerText = "Error: Please Make sure All the fields are filled before adding in an employee !";
         success.innerText = "";
@@ -44,7 +42,7 @@ function updateList() {
         let delbtn = document.createElement('button');
         delbtn.className = 'removebtn';
         delbtn.textContent = 'Delete User';
-        delbtn.onclick = () => delEmployee(employee.id);
+        delbtn.onclick = () => delEmployee(employees.id);
         li.appendChild(delbtn);
         list.appendChild(li);
     });
@@ -53,9 +51,10 @@ function delEmployee(id) {
     let index = employees.findIndex((employees) => employees.id === id);
     if (index !== -1) {
         employees.splice(index, 1);
-        updateEmployeeList();
-    }
+        
     if(employees.length=0){
         start.innerText='You have 0 Employees.';
+    }
+        updateList();
     }
 }

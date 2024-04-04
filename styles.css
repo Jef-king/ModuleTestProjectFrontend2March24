@@ -44,3 +44,15 @@ button{
 .start{
     opacity:70%;
 }
+li{
+    margin:15px 30px;
+    width:80%;
+    font-size: 25px;
+}
+li>button{
+    width:150px;
+    display:inline-block;
+    margin: 0 15px;
+    font-size:20px;
+    height:auto;
+}
